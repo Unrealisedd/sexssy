@@ -1,0 +1,49 @@
+max_threads: 10
+user_agent: "XSSScanner/1.0"
+timeout: 30
+max_retries: 3
+
+payloads:
+  basic:
+    file: "./payloads/xss.txt"
+  advanced:
+    file: "./payloads/xss2.txt"
+  evasion:
+    - case_swapping
+    - null_bytes
+    - encoding
+    - double_encoding
+
+crawl:
+  max_depth: 3
+  exclude_patterns:
+    - "logout"
+    - "signout"
+
+reporting:
+  output_format: "json"
+  include_headers: true
+  include_response: false
+  local_report_file: "xss_report.html"
+  discord_webhook_url: "https://discord.com/api/webhooks/1281208772982870096/NSL96Yw5FGkN_QtDyoD7wIIBGy2jdSsjzIoxIDE4ZlYC40lvxmc3cxaSGf5Gp7JKKnWc"  # Add your Discord webhook URL here if you want to use it
+
+custom_headers:
+  - "X-Forwarded-For"
+  - "X-Originating-IP"
+  - "X-Remote-IP"
+  - "X-Remote-Addr"
+
+plugin_directory: "plugins"
+
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+
+waf:
+  bypass_attempts: 5
+
+browser:
+  headless: true
+  no_sandbox: true
+  disable_dev_shm_usage: true
